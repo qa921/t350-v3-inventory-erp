@@ -47,6 +47,7 @@
               <option value="create_user">Create user</option>
               <option value="set_role">Grant role</option>
               <option value="remove_role">Revoke role</option>
+              <option value="update_password">Update password</option>
               <option value="deactivate_user">Deactivate user</option>
               <option value="reactivate_user">Reactivate user</option>
               <option value="delete_user">Delete user</option>
@@ -54,7 +55,7 @@
           </label>
           <label>Target user ID <input type="text" id="admin-user-id" placeholder="uuid (not needed for create)" /></label>
           <label>Email <input type="email" id="admin-email" placeholder="new user email" /></label>
-          <label>Password <input type="password" id="admin-password" placeholder="new user password" autocomplete="new-password" /></label>
+          <label>Password <input type="password" id="admin-password" placeholder="new user / new password" autocomplete="new-password" /></label>
           <label>Full name <input type="text" id="admin-full-name" /></label>
           <label>Role
             <select id="admin-role">
