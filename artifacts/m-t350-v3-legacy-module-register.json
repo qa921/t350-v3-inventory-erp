@@ -1,0 +1,32 @@
+{
+  "artifact": "M-T350-V3 legacy module recovery register",
+  "kind": "pre-recovery source fact",
+  "as_of": "2026-09-13",
+  "instruction": "These are prior-state claims to reconcile against implementation, deployed schema, RLS, and hosting. They are not an implementation plan.",
+  "modules": [
+    {"id":"catalog","route":"/catalog","table":"products","roles":"master,operations,sales","state":"client snapshot exists; table migration absent"},
+    {"id":"warehouses","route":"/warehouses","table":"warehouses","roles":"master,operations","state":"legacy route referenced; policy claim conflicts"},
+    {"id":"stock-ledger","route":"/inventory","table":"inventory_movements","roles":"master,operations","state":"inventory JSON is newer than prior UI cache"},
+    {"id":"purchase-orders","route":"/purchasing/orders","table":"purchase_orders","roles":"master,purchasing","state":"route and table claimed; no local implementation"},
+    {"id":"suppliers","route":"/purchasing/suppliers","table":"suppliers","roles":"master,purchasing","state":"stale alias cross-links"},
+    {"id":"receiving","route":"/purchasing/receipts","table":"goods_receipts","roles":"master,purchasing,operations","state":"missing migration material"},
+    {"id":"sales-orders","route":"/sales/orders","table":"sales_orders","roles":"master,sales","state":"dated channel facts disagree on status names"},
+    {"id":"customers","route":"/sales/customers","table":"customers","roles":"master,sales","state":"RLS expected but not evidenced"},
+    {"id":"invoices","route":"/finance/invoices","table":"invoices","roles":"master,finance","state":"server-only posting rule claimed"},
+    {"id":"payments","route":"/finance/payments","table":"payments","roles":"master,finance","state":"reconciliation key missing from prior export"},
+    {"id":"chart-of-accounts","route":"/finance/accounts","table":"chart_of_accounts","roles":"master,finance","state":"legacy definitions dated 2026-08-30"},
+    {"id":"expenses","route":"/finance/expenses","table":"expenses","roles":"master,finance","state":"HR expense visibility exception"},
+    {"id":"projects","route":"/projects","table":"projects","roles":"master,operations,sales","state":"deployed host points to V4 projects service"},
+    {"id":"project-tasks","route":"/projects/tasks","table":"project_tasks","roles":"master,operations","state":"route absent locally"},
+    {"id":"crm-leads","route":"/crm/leads","table":"leads","roles":"master,sales","state":"legacy source declares direct client reads"},
+    {"id":"crm-activities","route":"/crm/activities","table":"crm_activities","roles":"master,sales","state":"cross-link to customers unresolved"},
+    {"id":"employees","route":"/hr/employees","table":"employees","roles":"master,hr","state":"HR must remain restricted"},
+    {"id":"leave","route":"/hr/leave","table":"leave_requests","roles":"master,hr","state":"manager scope rule unresolved"},
+    {"id":"payroll","route":"/hr/payroll","table":"payroll_runs","roles":"master,hr","state":"never direct-client writable"},
+    {"id":"timesheets","route":"/hr/timesheets","table":"timesheets","roles":"master,hr,operations","state":"older RLS claim allows operations approval"},
+    {"id":"users","route":"/admin/users","table":"profiles","roles":"master","state":"account mutation must use edge function"},
+    {"id":"roles","route":"/admin/roles","table":"user_roles","roles":"master","state":"final active master guard required"},
+    {"id":"audit","route":"/admin/audit","table":"audit_log","roles":"master","state":"append-only audit policy expected"},
+    {"id":"settings","route":"/admin/settings","table":"tenant_settings","roles":"master","state":"hosting and Auth config must be documented without secrets"}
+  ]
+}
