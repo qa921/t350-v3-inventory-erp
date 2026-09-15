@@ -7,23 +7,39 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <nav class="top-nav">
+    <span class="brand">M-T556-V4</span>
+    <button id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">\u2630</button>
+    <div class="nav-links" id="nav-links">
+      <a href="#velocity">Velocity</a>
+      <a href="#prices">Price comparison</a>
+      <a href="#inventory">Inventory</a>
+    </div>
+  </nav>
+
   <header>
     <h1>Inventory Velocity &amp; Unified Price Comparison</h1>
     <p class="subtitle">
       Source-state fixture M-T556-V4 — canonical product IDs P-1001..P-1025.
-      All figures derived only from data/ and config/ sources.
+      All figures derived only from data/ and config/ sources; simulated and
+      defaulted values are always flagged.
     </p>
   </header>
 
   <main>
-    <section aria-labelledby="velocity-heading">
+    <section id="section-velocity" aria-labelledby="velocity-heading">
       <h2 id="velocity-heading">Velocity dashboard</h2>
       <div id="velocity-widget" class="widget"></div>
     </section>
 
-    <section aria-labelledby="price-heading">
-      <h2 id="price-heading">Unified price comparison</h2>
+    <section id="section-prices" aria-labelledby="price-heading" hidden>
+      <h2 id="price-heading">Unified price comparison (all channels)</h2>
       <div id="price-widget" class="widget"></div>
+    </section>
+
+    <section id="section-inventory" aria-labelledby="inventory-heading" hidden>
+      <h2 id="inventory-heading">Inventory health</h2>
+      <div id="inventory-widget" class="widget"></div>
     </section>
   </main>
 
