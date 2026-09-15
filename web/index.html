@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>T350-V3 — Inventory ERP</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <nav class="top-nav">
+    <span class="brand">T350-V3 ERP</span>
+    <button id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">&#9776;</button>
+    <div class="nav-links" id="nav-links"></div>
+    <div class="nav-session">
+      <span id="session-user"></span>
+      <button id="sign-out" hidden>Sign out</button>
+    </div>
+  </nav>
+
+  <header>
+    <h1>Inventory ERP</h1>
+    <p class="subtitle">
+      Restored V3 client. All data access goes directly to Supabase under RLS;
+      account administration goes through the admin-users edge function only.
+    </p>
+  </header>
+
+  <main>
+    <section id="section-login" aria-labelledby="login-heading">
+      <h2 id="login-heading">Sign in</h2>
+      <form id="login-form">
+        <label>Email <input type="email" id="login-email" required autocomplete="username" /></label>
+        <label>Password <input type="password" id="login-password" required autocomplete="current-password" /></label>
+        <button type="submit">Sign in</button>
+      </form>
+      <p class="muted">Public signup is disabled. Accounts are provisioned by a master user via account administration.</p>
+      <p id="login-error" class="error" role="alert"></p>
+    </section>
+
+    <section id="section-module" aria-labelledby="module-heading" hidden>
+      <h2 id="module-heading">Module</h2>
+      <div id="module-admin" hidden>
+        <h3>Account administration (master only, via edge function)</h3>
+        <form id="admin-form">
+          <label>Action
+            <select id="admin-action">
+              <option value="create_user">Create user</option>
+              <option value="set_role">Grant role</option>
+              <option value="remove_role">Revoke role</option>
+              <option value="deactivate_user">Deactivate user</option>
+              <option value="reactivate_user">Reactivate user</option>
+              <option value="delete_user">Delete user</option>
+            </select>
+          </label>
+          <label>Target user ID <input type="text" id="admin-user-id" placeholder="uuid (not needed for create)" /></label>
+          <label>Email <input type="email" id="admin-email" placeholder="new user email" /></label>
+          <label>Password <input type="password" id="admin-password" placeholder="new user password" autocomplete="new-password" /></label>
+          <label>Full name <input type="text" id="admin-full-name" /></label>
+          <label>Role
+            <select id="admin-role">
+              <option value="">(none)</option>
+              <option value="master">master</option>
+              <option value="operations">operations</option>
+              <option value="sales">sales</option>
+              <option value="purchasing">purchasing</option>
+              <option value="finance">finance</option>
+              <option value="hr">hr</option>
+            </select>
+          </label>
+          <button type="submit">Submit to edge function</button>
+        </form>
+        <p id="admin-result" class="muted"></p>
+      </div>
+      <div id="module-content" class="widget"></div>
+    </section>
+  </main>
+
+  <script src="/config.js"></script>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
