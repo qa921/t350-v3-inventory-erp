@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>M-T556-V4 — Inventory Velocity &amp; Price Comparison</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>Inventory Velocity &amp; Unified Price Comparison</h1>
+    <p class="subtitle">
+      Source-state fixture M-T556-V4 — canonical product IDs P-1001..P-1025.
+      All figures derived only from data/ and config/ sources.
+    </p>
+  </header>
+
+  <main>
+    <section aria-labelledby="velocity-heading">
+      <h2 id="velocity-heading">Velocity dashboard</h2>
+      <div id="velocity-widget" class="widget"></div>
+    </section>
+
+    <section aria-labelledby="price-heading">
+      <h2 id="price-heading">Unified price comparison</h2>
+      <div id="price-widget" class="widget"></div>
+    </section>
+  </main>
+
+  <script type="module" src="dist/app.js"></script>
+</body>
+</html>

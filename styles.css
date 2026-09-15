@@ -1,0 +1,94 @@
+:root {
+  --no-sales-bg: #fde2e2;
+  --no-sales-border: #c0392b;
+  --slow-bg: #fff3cd;
+  --slow-border: #b8860b;
+}
+
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  margin: 0 auto;
+  max-width: 1100px;
+  padding: 1rem;
+  color: #1c1c1c;
+}
+
+.subtitle { color: #555; }
+
+.widget {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  min-height: 4rem;
+}
+
+.widget--loading { opacity: 0.6; }
+
+.widget--error { border-color: var(--no-sales-border); }
+
+.widget-error-box {
+  background: var(--no-sales-bg);
+  border-left: 4px solid var(--no-sales-border);
+  padding: 0.75rem;
+}
+
+.summary-cards {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.summary-card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 0.75rem 1.25rem;
+  text-align: center;
+  min-width: 110px;
+}
+
+.summary-card__count { font-size: 2rem; font-weight: 700; }
+.summary-card__label { text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.04em; }
+
+/* The two prominent classes */
+.summary-card--no-sales {
+  background: var(--no-sales-bg);
+  border: 2px solid var(--no-sales-border);
+}
+
+.summary-card--slow {
+  background: var(--slow-bg);
+  border: 2px solid var(--slow-border);
+}
+
+.data-table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+.data-table th,
+.data-table td {
+  border: 1px solid #ddd;
+  padding: 0.35rem 0.6rem;
+  text-align: left;
+}
+
+.data-table thead { background: #f4f4f4; }
+
+.csv-btn {
+  margin-top: 0.5rem;
+  padding: 0.4rem 0.9rem;
+  cursor: pointer;
+}
+
+.window-note { color: #555; font-size: 0.85rem; }
+
+.artifact-warning {
+  background: var(--slow-bg);
+  border-left: 4px solid var(--slow-border);
+  padding: 0.5rem 0.75rem;
+  font-size: 0.85rem;
+}
