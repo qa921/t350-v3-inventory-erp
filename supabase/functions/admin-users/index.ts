@@ -1,8 +1,9 @@
 // T350-V3 admin-users edge function.
 //
 // Sole channel for account administration (create user, grant/revoke role,
-// deactivate, delete). Direct browser mutation of profiles/user_roles is
-// forbidden by RLS; all mutations run here with the service role.
+// password update, deactivate, delete). Direct browser mutation of
+// profiles/user_roles is forbidden by RLS; all mutations run here with the
+// service role.
 //
 // Auth model: the caller's JWT is verified in-code (auth.getUser) and the
 // caller must be an ACTIVE master. Gateway JWT verification is disabled on
@@ -21,6 +22,7 @@ const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
 const SCHEMA = Deno.env.get("ERP_SCHEMA") ?? "t350_v3";
 
 const VALID_ROLES = new Set(["master", "operations", "sales", "purchasing", "finance", "hr"]);
+const MIN_PASSWORD_LENGTH = 6;
 
 const CORS_HEADERS = {
   "Access-Control-Allow-Origin": "*",
@@ -148,6 +150,17 @@ Deno.serve(async (req: Request) => {
       const { error } = await admin.from("user_roles").delete().eq("user_id", targetId).eq("role", role);
       if (error) return json({ error: "role_revoke_failed", detail: error.message }, 400);
       await audit("role_revoked", targetId, { role });
+      return json({ ok: true });
+    }
+
+    case "update_password": {
+      const newPassword = String(payload.password ?? "");
+      if (!targetId || !newPassword) return json({ error: "user_id_and_password_required" }, 400);
+      if (newPassword.length < MIN_PASSWORD_LENGTH) return json({ error: "password_too_short" }, 400);
+      const { error } = await admin.auth.admin.updateUserById(targetId, { password: newPassword });
+      if (error) return json({ error: "password_update_failed", detail: error.message }, 400);
+      // Never record the password itself — only that the event happened.
+      await audit("account_password_updated", targetId, {});
       return json({ ok: true });
     }
 
